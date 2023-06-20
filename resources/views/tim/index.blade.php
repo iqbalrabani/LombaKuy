@@ -6,28 +6,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Daftar Tim Lomba</h1>
+        <h1>List Lomba</h1>
         @php
             $tims = \App\Models\Tim::all();
         @endphp
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
+                    <th scope="col">No</th>
                     <th scope="col">ID Tim</th>
                     <th scope="col">Nama Tim</th>
-                    <th scope="col">ID Pengguna</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($tims as $tim)
+                @forelse($tims as $key => $tim)
                 <tr>
+                    <td>{{ $key + 1 }}</td>
                     <td>{{ $tim->idTim }}</td>
                     <td>{{ $tim->namaTim }}</td>
-                    <td>{{ $tim->idPengguna }}</td>
+                    <td>
+                        <a class="btn btn-primary">Detail</a>
+                    </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3">Tidak ada tim yang tersedia.</td>
+                    <td colspan="4">Tidak ada tim yang tersedia.</td>
                 </tr>
                 @endforelse
             </tbody>

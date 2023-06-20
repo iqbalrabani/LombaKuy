@@ -18,6 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/tim', function () {
-    return view('index');
+    return view('tim.index');
 });
 
