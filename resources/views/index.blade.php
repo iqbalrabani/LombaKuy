@@ -7,6 +7,9 @@
 <body>
     <div class="container">
         <h1>Daftar Tim Lomba</h1>
+        @php
+            $tims = \App\Models\Tim::all();
+        @endphp
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
