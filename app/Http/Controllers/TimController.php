@@ -11,6 +11,6 @@ class TimController extends Controller
     {
         $tims = Tim::all();
     
-        return view('index', compact('tims'));
+        return view('tim.index', compact('tims'));
     }
 }
