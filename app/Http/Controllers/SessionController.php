@@ -32,7 +32,7 @@ class SessionController extends Controller
         if (Auth::attempt($infologin)) {
             // Jika berhasil
             // Redirect ke halaman utama
-            return 'Sukses';
+            return redirect('/yourCompetition');
         } else {
             // Jika gagal
             // return 'Gagal';
