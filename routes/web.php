@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,5 @@ Route::get('/tim', function () {
     return view('index');
 });
 
+Route::get('/sesi',[SessionController::class,'index']);
+Route::post('/sesi/login',[SessionController::class,'login']);
