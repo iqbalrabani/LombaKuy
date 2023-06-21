@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CompeController;
 use App\Http\Controllers\TimController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< HEAD
+=======
+Route::get('/tim', function () {
+    return view('tim.index');
+});
+>>>>>>> 59718f291e90184ad24536bfebd5ecaa6becb5ed
 // Route::get('/tim', function () {
 //     return view('index');
 // });
@@ -38,3 +45,5 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('reg
 
 
 
+Route::get('/sesi',[SessionController::class,'index']);
+Route::post('/sesi/login',[SessionController::class,'login']);
