@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CompeController;
+use App\Http\Controllers\TimController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +19,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tim', function () {
-    return view('index');
-});
+// Route::get('/tim', function () {
+//     return view('index');
+// });
+
+Route::get('/tim', [TimController::class, 'index']);
+
+// Route::get('/yourCompetition', function () {
+//     return view('yourCompe');
+// });
+
+Route::get('/yourCompetition', [CompeController::class, 'showCompe']);
+Route::get('/listCompetition', [CompeController::class, 'listLomba']);
+
+Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;
+
+
 
