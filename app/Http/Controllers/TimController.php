@@ -13,4 +13,11 @@ class TimController extends Controller
     
         return view('tim.index', compact('tims'));
     }
+
+    public function detail()
+    {
+        $tims = Tim::all();
+    
+        return view('tim.detail', compact('tims'));
+    }
 }
