@@ -22,23 +22,30 @@
 @endif 
     <div class="container">
         <div class="w-50 mx-auto border rounded px-3 py-3 mt-5">
-            <h1 class="text-center">Login</h1>
-            <form action="/sesi/login" method="POST">
+            <h1 class="text-center">Register</h1>
+            <form action="/sesi/create" method="POST">
                 @csrf
+                <div class="form-group">
+                    <label for="namePengguna">Nama Lengkap</label>
+                    <input type="text" value="{{ Session::get('namePengguna') }}" name="namePengguna" class="form-control" required>
+                </div>
                 <div class="form-group">
                     <label for="idPengguna">Id Pengguna</label>
                     <input type="text" value="{{ Session::get('idPengguna') }}" name="idPengguna" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" required>
+                    <input type="password" name="password" class="form-control" required|min:6>
                 </div>
-                <button name="submit" type="submit" class="btn btn-primary btn-block">Login</button>
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select class="form-control" id="kategori" name="kategori">
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                <button name="submit" type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
-        </div>
-        <div class="text-center">
-            Belum memiliki akun?
-            <a href="/sesi/register">REGISTER</a>
         </div>
     </div>
     <!-- Bootstrap JS -->
