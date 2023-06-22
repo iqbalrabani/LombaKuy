@@ -20,30 +20,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
-=======
 Route::get('/tim', function () {
     return view('tim.index');
 });
->>>>>>> 59718f291e90184ad24536bfebd5ecaa6becb5ed
-// Route::get('/tim', function () {
-//     return view('index');
-// });
 
 Route::get('/tim', [TimController::class, 'index']);
 
 Route::get('/detail', [TimController::class, 'detail']);
 
-// Route::get('/yourCompetition', function () {
-//     return view('yourCompe');
-// });
-
-Route::get('/yourCompetition', [CompeController::class, 'showCompe']);
+// ! KOMPETISI (HAIDAR)
+Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
+Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
 
-Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;
+// Tambah lomba
+Route::post('/applyCompetition', [CompeController::class, 'applyLomba'])->name('apply-lomba');
+// hapus lomba
+// Route::delete('/lomba/delete', [CompeController::class, 'deleteLomba'])->name('delete-lomba');
+Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
 
-
-
+// ! LOGIN
 Route::get('/sesi',[SessionController::class,'index']);
 Route::post('/sesi/login',[SessionController::class,'login']);
