@@ -20,12 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
-=======
-Route::get('/tim', function () {
-    return view('tim.index');
-});
->>>>>>> 59718f291e90184ad24536bfebd5ecaa6becb5ed
 // Route::get('/tim', function () {
 //     return view('index');
 // });
@@ -33,6 +27,8 @@ Route::get('/tim', function () {
 Route::get('/tim', [TimController::class, 'index']);
 
 Route::get('/detail', [TimController::class, 'detail']);
+
+Route::get('/edit', [TimController::class, 'edit']);
 
 // Route::get('/yourCompetition', function () {
 //     return view('yourCompe');
