@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Lomba extends Model
 {
     protected $table = 'lombas';
+    public $timestamps = false;
     protected $fillable = [
         'idLomba',
         'namaLomba',
         'kategoriLomba',
-        'Kapasitas',
+        'kapasitas',
         'batasPendaftaran',
         'penyelenggara',
         'biaya'
