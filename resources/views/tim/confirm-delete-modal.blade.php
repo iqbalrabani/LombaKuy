@@ -1,23 +1,20 @@
-<!-- confirm-delete-modal.blade.php -->
-
-<!-- Modal Konfirmasi Hapus Data -->
-<div id="confirmDeleteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content -->
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Konfirmasi Hapus Data</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus Anggota Tim</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus anggota ini?</p>
+                Apakah Anda yakin ingin menghapus anggota tim ini?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="deleteMember()">OK</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" onclick="deleteMember()">Yakin</button>
             </div>
         </div>
     </div>
 </div>
-
-<!-- confirm-delete-modal.blade.php -->
