@@ -14,7 +14,7 @@
                     <a href="#" class="nav-link">Mahasiswa</a>
                   </li> --}}
               <li class="nav-item">
-                <a href="/sesi/logout" class="nav-link active" aria-current="page">LOGOUT</a>
+                <a href="/sesi/logout" class="nav-link active mr-4" aria-current="page">LOGOUT</a>
               </li>
 
             </ul>
@@ -65,8 +65,7 @@
                     <td>{{ $m->batasPendaftaran }}</td>
                     <td>{{ $m->penyelenggara }}</td>
                     <td>{{ $m->biaya }}</td>
-                    <td><button type='button' class='btn btn-info'>Show Team</button></td>
-                    <!-- <td><button type='button' class='btn btn-danger'>Delete</button></td> -->
+                    <td><a href='/detail' class='btn btn-info'>Show Team</a></td>
                     <td><a href='/lomba/delete/{{$m->idLomba}}' class='btn btn-danger'>Delete</a></td>
                 </tr>
                 @endif

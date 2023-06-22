@@ -27,7 +27,6 @@ Route::get('/', function () {
 
 Route::get('/detail', [TimController::class, 'detail']);
 
-Route::get('/buattim', [TimController::class, 'buat']);
 Route::get('/edit', [TimController::class, 'edit']);
 
 // ! KOMPETISI (HAIDAR)
@@ -70,10 +69,17 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
 
+// Apply lomba - Daftar timnya
+Route::get('/buattim', [TimController::class, 'buat'])->name('buat-tim');
+
 // Tambah lomba
 Route::post('/applyCompetition', [CompeController::class, 'applyLomba'])->name('apply-lomba');
 // hapus lomba
 Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
+
+// ! SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
+Route::get('/lomba/showTeam/{idPengguna}',[CompeController::class,'showTeam']);
+
 
 // ! LOGIN
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;

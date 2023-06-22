@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
+
 class SessionController extends Controller
 {
     function index()
@@ -30,11 +31,18 @@ class SessionController extends Controller
             'idPengguna' => $request->idPengguna,
             'password' => $request->password
         ];
+        
+        $kategori = User::where('idPengguna', $infologin['idPengguna'])->value('kategori');
 
         if (Auth::attempt($infologin)) {
             // Jika berhasil
             // Redirect ke halaman utama
-            return redirect('/yourCompetition');
+            if($kategori == 'user'){
+
+                return redirect('/yourCompetition');
+            } else{
+                return redirect('/event');
+            }
         } else {
             // Jika gagal
             // return 'Gagal';

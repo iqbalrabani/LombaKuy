@@ -14,6 +14,7 @@
     <div class="container">
         <h1>Detail Tim Lomba</h1>
         @foreach($tims as $tim)
+        
         <h3>Welcome, {{ $tim->namaTim }}</h3>
 
         <div class="row mt-3">

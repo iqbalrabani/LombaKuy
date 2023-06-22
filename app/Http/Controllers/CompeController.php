@@ -42,7 +42,7 @@ class CompeController extends Controller
             'idPengguna' => $idPengguna
         ]);
 
-        return redirect()->route('your-competitions');
+        return redirect()->route('buat-tim');
     }
 
     public function deleteLomba2(Request $request)
