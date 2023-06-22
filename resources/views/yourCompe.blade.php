@@ -66,7 +66,6 @@
                     <td>{{ $m->penyelenggara }}</td>
                     <td>{{ $m->biaya }}</td>
                     <td><button type='button' class='btn btn-info'>Show Team</button></td>
-                    <!-- <td><button type='button' class='btn btn-danger'>Delete</button></td> -->
                     <td><a href='/lomba/delete/{{$m->idLomba}}' class='btn btn-danger'>Delete</a></td>
                 </tr>
                 @endif

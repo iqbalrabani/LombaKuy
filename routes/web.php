@@ -37,6 +37,10 @@ Route::post('/applyCompetition', [CompeController::class, 'applyLomba'])->name('
 // hapus lomba
 Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
 
+// ! SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
+Route::get('/lomba/showTeam/{idPengguna}',[CompeController::class,'showTeam']);
+
+
 // ! LOGIN
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;
 
