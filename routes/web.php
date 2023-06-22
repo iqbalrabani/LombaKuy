@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 
 Route::get('/detail', [TimController::class, 'detail']);
+
+Route::get('/buattim', [TimController::class, 'buat']);
 Route::get('/edit', [TimController::class, 'edit']);
 
 // ! KOMPETISI (HAIDAR)

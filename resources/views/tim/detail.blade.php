@@ -88,7 +88,7 @@
 
         <div class="row mt-3">
             <div class="col">
-                <button class="btn btn-primary">Save</button>
+                <a class="btn btn-primary" href="{{ url('/yourCompetition') }}">Save</a>
             </div>
         </div>
         @endforeach

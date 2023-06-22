@@ -23,6 +23,13 @@ class TimController extends Controller
         return view('tim.detail', compact('tims'));
     }
 
+    public function buat()
+    {
+        $tims = Tim::all();
+
+        return view('tim.buatTim', compact('tims'));
+    }
+
     public function edit()
     {
         $tims = Tim::all();

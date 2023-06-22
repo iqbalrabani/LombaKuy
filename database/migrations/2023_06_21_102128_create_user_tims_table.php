@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateUserTimsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_tims', function (Blueprint $table) {
-            $table->string('idTim')
+            $table->unsignedBigInteger('idTim');
+            $table->unsignedBigInteger('idPengguna');
+
+            $table->foreign('idTim')
                 ->references('idTim')
                 ->on('tims')
-                ->onDelete('cascade');
-            $table->string('idPengguna')
+                ->onDelete('cascade')
+                ->name('fk_user_tims_idTim');
+
+            $table->foreign('idPengguna')
                 ->references('idPengguna')
                 ->on('users')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->name('fk_user_tims_idPengguna');
+
+            $table->timestamps();
         });
     }
 
