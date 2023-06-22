@@ -30,7 +30,7 @@ Route::get('/tim', [TimController::class, 'index']);
 
 Route::get('/detail', [TimController::class, 'detail']);
 
-Route::get('/edit', [TimController::class, 'edit']);
+Route::get('/buattim', [TimController::class, 'buat']);
 
 // Route::get('/yourCompetition', function () {
 //     return view('yourCompe');

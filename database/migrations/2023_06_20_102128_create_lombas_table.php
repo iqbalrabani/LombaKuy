@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('batasPendaftaran');
             $table->string('penyelenggara');
             $table->string('biaya');
+            $table->string('deskripsi');
         });
     }
 
