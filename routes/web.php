@@ -22,9 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tim', function () {
-    return view('tim.index');
-});
 // Route::get('/tim', function () {
 //     return view('index');
 // });
@@ -42,10 +39,3 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('reg
 
 Route::get('/sesi',[SessionController::class,'index']);
 Route::post('/sesi/login',[SessionController::class,'login']);
-
-Route::get('/event',[EventController::class,'index']);
-Route::post('/event/add',[EventController::class,'addLomba']);
-Route::get('/event/edit/{idLomba}',[EventController::class,'editPage']);
-Route::post('/event/edited/{idLomba}',[EventController::class,'editLomba']);
-Route::get('/event/delete/{idLomba}',[EventController::class,'deleteLomba']);
-Route::get('/getRingkasan/{id}', 'RingkasanController@show');
