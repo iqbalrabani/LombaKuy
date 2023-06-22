@@ -28,6 +28,10 @@ Route::get('/', function () {
 
 Route::get('/tim', [TimController::class, 'index']);
 
+Route::get('/detail', [TimController::class, 'detail']);
+
+Route::get('/edit', [TimController::class, 'edit']);
+
 // Route::get('/yourCompetition', function () {
 //     return view('yourCompe');
 // });
@@ -39,3 +43,13 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('reg
 
 Route::get('/sesi',[SessionController::class,'index']);
 Route::post('/sesi/login',[SessionController::class,'login']);
+
+Route::get('/event',[EventController::class,'index']);
+Route::post('/event/add',[EventController::class,'addLomba']);
+Route::get('/event/edit/{idLomba}',[EventController::class,'editPage']);
+Route::post('/event/edited/{idLomba}',[EventController::class,'editLomba']);
+Route::get('/event/delete/{idLomba}',[EventController::class,'deleteLomba']);
+Route::get('/getRingkasan/{id}', 'RingkasanController@show');
+Route::get('/sesi/logout',[SessionController::class,'logout']);
+Route::get('/sesi/register',[SessionController::class,'register']);
+Route::post('/sesi/create',[SessionController::class,'create']);
