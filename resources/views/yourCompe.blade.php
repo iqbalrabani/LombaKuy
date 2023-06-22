@@ -7,6 +7,20 @@
 </head>
 
 <body>
+    <div>
+        <header class="d-flex justify-content-end py-3 mb-4 border-bottom">
+            <ul class="nav nav-pills ms-auto">
+                {{-- <li class="nav-item">
+                    <a href="#" class="nav-link">Mahasiswa</a>
+                  </li> --}}
+              <li class="nav-item">
+                <a href="/sesi/logout" class="nav-link active" aria-current="page">LOGOUT</a>
+              </li>
+
+            </ul>
+          </header>
+
+    </div>
     <div class="container">
         <br>
         <h1>LombaKuy!</h1>
