@@ -3,6 +3,8 @@
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CompeController;
 use App\Http\Controllers\TimController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\RingkasanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,10 +41,15 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;
 
-
-
 Route::get('/sesi',[SessionController::class,'index']);
 Route::post('/sesi/login',[SessionController::class,'login']);
+
+Route::get('/event',[EventController::class,'index']);
+Route::post('/event/add',[EventController::class,'addLomba']);
+Route::get('/event/edit/{idLomba}',[EventController::class,'editPage']);
+Route::post('/event/edited/{idLomba}',[EventController::class,'editLomba']);
+Route::get('/event/delete/{idLomba}',[EventController::class,'deleteLomba']);
+Route::get('/getRingkasan/{id}', 'RingkasanController@show');
 Route::get('/sesi/logout',[SessionController::class,'logout']);
 Route::get('/sesi/register',[SessionController::class,'register']);
 Route::post('/sesi/create',[SessionController::class,'create']);
