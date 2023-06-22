@@ -4,7 +4,9 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CompeController;
 use App\Http\Controllers\TimController;
 use App\Http\Controllers\EventController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\RingkasanController;
+use App\Models\Tim;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,40 @@ Route::get('/edit', [TimController::class, 'edit']);
 
 // ! KOMPETISI (HAIDAR)
 Route::get('/yourCompetition', [CompeController::class, 'showCompe']);
+Route::post('/yourCompetition', function (Request $request) {
+    // Validasi data yang diterima dari permintaan
+    $request->validate([
+        'namaTim' => 'required',
+        'anggota' => 'required|array',
+        'anggota.*.nama' => 'required',
+        'anggota.*.idPengguna' => 'required',
+        'anggota.*.kedudukan' => 'required',
+    ]);
+
+    // Ambil data dari permintaan
+    $namaTim = $request->input('namaTim');
+    $anggota = $request->input('anggota');
+
+    // Simpan data tim ke database
+    $tim = new Tim();
+    $tim->namaTim = $namaTim;
+    $tim->save();
+
+    // Simpan data anggota tim ke database
+    foreach ($anggota as $dataAnggota) {
+        $nama = $dataAnggota['nama'];
+        $idPengguna = $dataAnggota['idPengguna'];
+        $kedudukan = $dataAnggota['kedudukan'];
+
+        $tim->anggota()->create([
+            'nama' => $nama,
+            'idPengguna' => $idPengguna,
+            'kedudukan' => $kedudukan,
+        ]);
+    }
+
+    return response()->json(['message' => 'Tim berhasil disimpan']);
+});
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
