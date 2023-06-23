@@ -39,7 +39,8 @@ class SessionController extends Controller
             // Redirect ke halaman utama
             if ($kategori == 'user') {
                 $namePengguna = Auth::user()->namePengguna;
-                return redirect("/yourCompetition/$namePengguna");
+                $idPengguna = Auth::user()->idPengguna;
+                return redirect("/yourCompetition/$namePengguna/$idPengguna");
                 // return redirect('/yourCompetition');
                 // return view('/yourCompetition', compact('namePengguna'));
                 // return redirect('/yourCompetition/JohnDoe');

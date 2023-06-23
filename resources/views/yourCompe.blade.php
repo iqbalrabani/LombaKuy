@@ -62,7 +62,7 @@ use Illuminate\Support\Facades\Auth;
             </thead>
             <tbody>
                 @foreach ($user_lombas as $x)
-                @if ($x->idPengguna==1)
+                @if ($x->idPengguna==$idPen)
                 @foreach ($lombas as $m)
                 @if ($x->idLomba == $m->idLomba )
                 <tr>

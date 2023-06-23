@@ -35,6 +35,8 @@ Route::get('/test/{name}', [CompeController::class, 'testing']);
 
 Route::get('/yourCompetition', [CompeController::class, 'showCompe']);
 Route::get('/yourCompetition/{namePengguna}', [CompeController::class, 'showCompe']);
+Route::get('/yourCompetition/{namePengguna}/{idPengguna}', [CompeController::class, 'showCompe2']);
+
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');

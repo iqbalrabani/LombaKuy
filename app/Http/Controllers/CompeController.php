@@ -25,6 +25,16 @@ class CompeController extends Controller
         return "Not Found";
     }
 
+    public function showCompe2($namePengguna, $idPengguna)
+    {
+        $lomba = Lomba::all();
+        $user_lomba = user_lomba::all();
+        if ($lomba) {
+            return view('yourCompe', ['lombas' => $lomba, 'user_lombas' => $user_lomba, 'namePengguna' => $namePengguna, 'idPen' => $idPengguna]);
+        }
+        return "Not Found";
+    }
+
     public function listLomba()
     {
         $lomba = Lomba::all();
