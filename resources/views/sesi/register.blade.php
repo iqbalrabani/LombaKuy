@@ -40,6 +40,11 @@
                 <button name="submit" type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
         </div>
+        <br>
+        <div class="text-center">
+            Sudah memiliki akun?
+            <a href="/sesi">Login</a>
+        </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
