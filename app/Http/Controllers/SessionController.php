@@ -88,11 +88,26 @@ class SessionController extends Controller
             'idPengguna' => $request->idPengguna,
             'password' => Hash::make($request->password),
             'kategori' => 'user'
-
         ];
+        $idPengguna=$request->idPengguna;
+        $password=($request->password);
+        $repassword = ($request->repassword);
+        $check = User::where('idPengguna',$idPengguna)->first();
 
-        User::create($data);
+        if($check){
+            return redirect()->back()->withErrors(['error' => 'ID PENGGUNA TELAH DIGUNAKAN']);
+        } else {
+            if(strlen($password)>=6){
+                if($password==$repassword){
+                    User::create($data);
+                } else {
+                    return redirect()->back()->withErrors(['error' => 'PASSWORD YANG DIMASUKKAN TIDAK SAMA']);
+                }
 
+            } else {
+                return redirect()->back()->withErrors(['error' => 'PASSWORD HARUS TERDIRI DARI 6 KARAKTER']);
+            }
+        }
         if (Auth::attempt($infologin)) {
             // Jika berhasil
             // Redirect ke halaman utama
