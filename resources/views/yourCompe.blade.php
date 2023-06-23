@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
+
 <!DOCTYPE html>
 <html>
 
@@ -13,34 +17,35 @@
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">Mahasiswa</a>
                   </li> --}}
-              <li class="nav-item">
-                <a href="/sesi/logout" class="nav-link active" aria-current="page">LOGOUT</a>
-              </li>
+                <li class="nav-item">
+                    <a href="/sesi/logout" class="nav-link active mr-4" aria-current="page">LOGOUT</a>
+                </li>
 
             </ul>
-          </header>
+        </header>
 
     </div>
     <div class="container">
         <br>
         <h1>LombaKuy!</h1>
+
+        <h4>Welcome {{ $namePengguna }}</h4>
+
         <br>
-        <h3>Register More Competitions ?</h3>
+        <br>
+
         <form method="GET" action="{{ route('registration.submit') }}">
             @csrf
 
             <div class="form-row align-items-center">
-                <div class="col">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Masukan Nama Tim" required>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">Daftar</button>
+                <h3>Your Competitions</h3>
+                <div class="col text-right">
+                    <button type="submit" class="btn btn-primary">Register New Competition</button>
                 </div>
             </div>
         </form>
-
         <br>
-        <h3>Your Competitions</h3>
+
         <table class="table">
             <thead>
                 <tr>
@@ -56,7 +61,10 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($user_lombas as $x)
+                @if ($x->idPengguna==$idPen)
                 @foreach ($lombas as $m)
+                @if ($x->idLomba == $m->idLomba )
                 <tr>
                     <td>{{ $m->idLomba }}</td>
                     <td>{{ $m->namaLomba }}</td>
@@ -65,9 +73,12 @@
                     <td>{{ $m->batasPendaftaran }}</td>
                     <td>{{ $m->penyelenggara }}</td>
                     <td>{{ $m->biaya }}</td>
-                    <td><button type='button' class='btn btn-info'>Show Team</button></td>
-                    <td><button type='button' class='btn btn-danger'>Delete</button></td>
+                    <td><a href='/detail' class='btn btn-info'>Show Team</a></td>
+                    <td><a href='/lomba/delete/{{$m->idLomba}}' class='btn btn-danger'>Delete</a></td>
                 </tr>
+                @endif
+                @endforeach
+                @endif
                 @endforeach
             </tbody>
         </table>

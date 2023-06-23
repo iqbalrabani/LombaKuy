@@ -3,20 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lomba;
+use App\Models\user_lomba;
 use Illuminate\Http\Request;
 
 class CompeController extends Controller
 {
-    public function testing()
+    public function testing($name)
     {
-        return view('yourCompetition');
+        // return view('testingRandom');
+        return view('testingRandom', ['name' => $name]);
+        // return redirect('/testingRandom/$name');
     }
 
-    public function showCompe()
+    public function showCompe($namePengguna)
     {
         $lomba = Lomba::all();
-        if($lomba) {
-            return view('yourCompe', ['lombas' => $lomba]);
+        $user_lomba = user_lomba::all();
+        if ($lomba) {
+            return view('yourCompe', ['lombas' => $lomba, 'user_lombas' => $user_lomba, 'namePengguna' => $namePengguna]);
+        }
+        return "Not Found";
+    }
+
+    public function showCompe2($namePengguna, $idPengguna)
+    {
+        $lomba = Lomba::all();
+        $user_lomba = user_lomba::all();
+        if ($lomba) {
+            return view('yourCompe', ['lombas' => $lomba, 'user_lombas' => $user_lomba, 'namePengguna' => $namePengguna, 'idPen' => $idPengguna]);
         }
         return "Not Found";
     }
@@ -24,10 +38,42 @@ class CompeController extends Controller
     public function listLomba()
     {
         $lomba = Lomba::all();
-        if($lomba) {
+        if ($lomba) {
             return view('listLomba', ['lombas' => $lomba]);
         }
         return "Not Found";
+    }
+
+    public function applyLomba(Request $request)
+    {
+        $idLomba = $request->input('idLomba');
+        $idPengguna = $request->input('idPengguna');
+
+        User_Lomba::create([
+            'idLomba' => $idLomba,
+            'idPengguna' => $idPengguna
+        ]);
+
+        return redirect()->route('buat-tim');
+    }
+
+    public function deleteLomba2(Request $request)
+    {
+        $idLomba = $request->input('idLomba');
+        $idPengguna = $request->input('idPengguna');
+
+        User_Lomba::where('idLomba', $idLomba)
+            ->where('idPengguna', $idPengguna)
+            ->delete();
+
+        return redirect()->route('your-competitions');
+    }
+
+    function deleteLomba($idLomba)
+    {
+        $lomba = User_Lomba::where('idLomba', $idLomba);
+        $lomba->delete();
+        return redirect()->route('your-competitions');
     }
 
     

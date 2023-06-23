@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
+
 class SessionController extends Controller
 {
     function index()
@@ -31,28 +32,44 @@ class SessionController extends Controller
             'password' => $request->password
         ];
 
+        $kategori = User::where('idPengguna', $infologin['idPengguna'])->value('kategori');
+
         if (Auth::attempt($infologin)) {
             // Jika berhasil
             // Redirect ke halaman utama
-            return redirect('/yourCompetition');
+            if ($kategori == 'user') {
+                $namePengguna = Auth::user()->namePengguna;
+                $idPengguna = Auth::user()->idPengguna;
+                return redirect("/yourCompetition/$namePengguna/$idPengguna");
+                // return redirect('/yourCompetition');
+                // return view('/yourCompetition', compact('namePengguna'));
+                // return redirect('/yourCompetition/JohnDoe');
+                // return view('yourCompe', compact('namePengguna'));
+                // return view('yourCompe', ['namePengguna' => $namePengguna]);
+            } else {
+                return redirect('/event');
+            }
         } else {
             // Jika gagal
             // return 'Gagal';
-           return redirect()->back()->withErrors(['email' => 'Email atau password tidak valid.']);
+            return redirect()->back()->withErrors(['email' => 'Email atau password tidak valid.']);
         }
     }
-    function logout(){
+    function logout()
+    {
         Auth::logout();
-        return redirect('sesi')->withErrors('succes','Berhasil logout');
+        return redirect('sesi')->withErrors('succes', 'Berhasil logout');
     }
-    function register(){
+    function register()
+    {
         return view('sesi/register');
     }
-    function create(Request $request){
+    function create(Request $request)
+    {
         Session::flash('namePengguna', $request->namePengguna);
         Session::flash('idPengguna', $request->idPengguna);
         $request->validate([
-            'namePengguna' =>'required',
+            'namePengguna' => 'required',
             'idPengguna' => 'required',
             'password' => 'required'
         ], [
@@ -67,19 +84,20 @@ class SessionController extends Controller
         ];
 
         $data = [
-            'namePengguna'=>$request->namePengguna,
-            'idPengguna'=>$request->idPengguna,
-            'password'=> Hash::make($request->password) ,
-            'kategori'=>$request->kategori
+            'namePengguna' => $request->namePengguna,
+            'idPengguna' => $request->idPengguna,
+            'password' => Hash::make($request->password),
+            'kategori' => 'user'
 
         ];
-        
+
         User::create($data);
 
         if (Auth::attempt($infologin)) {
             // Jika berhasil
             // Redirect ke halaman utama
-            return redirect('/yourCompetition');
+            // return redirect('/yourCompetition');
+            return redirect('/sesi');
         } else {
             // Jika gagal
             // return 'Gagal';
