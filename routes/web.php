@@ -4,7 +4,9 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CompeController;
 use App\Http\Controllers\TimController;
 use App\Http\Controllers\EventController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\RingkasanController;
+use App\Models\Tim;
 use Illuminate\Support\Facades\Route;
 
 /*

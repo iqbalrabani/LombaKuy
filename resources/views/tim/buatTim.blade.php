@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Form Tim Lomba</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-
 <body>
     <div class="container">
         <h1>Daftar Lomba</h1>
-
         <div class="row mt-3">
             <div class="col">
                 <form>
@@ -37,7 +33,6 @@
                 </form>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col">
                 <table class="table table-striped">
@@ -50,20 +45,17 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="anggotaTableBody">
-                    </tbody>
+                    <tbody id="anggotaTableBody"></tbody>
                 </table>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col">
-                <button class="btn btn-primary" href="{{ url('/listCompetition') }}">Simpan</button>
+                <button class="btn btn-primary" onclick="saveTim()">Simpan</button>
                 <button class="btn btn-secondary" onclick="resetForm()">Reset</button>
             </div>
         </div>
     </div>
-
     <script>
         var anggotaCounter = 0;
 
@@ -115,17 +107,13 @@
                 });
 
                 // Send the data to the server
-                // You can use AJAX or any other method to send the data to the server
-
-                // Example AJAX request
                 $.ajax({
-                    url: '/simpan-tim',
+                    url: '/yourCompetition',
                     method: 'POST',
                     data: JSON.stringify(timData),
                     contentType: 'application/json',
                     success: function(response) {
                         console.log('Tim berhasil disimpan:', response);
-                        // Reset the form after successful save
                         resetForm();
                     },
                     error: function(xhr, status, error) {
@@ -147,5 +135,4 @@
         }
     </script>
 </body>
-
 </html>
