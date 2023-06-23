@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
+
 <!DOCTYPE html>
 <html>
 
@@ -13,19 +17,23 @@
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">Mahasiswa</a>
                   </li> --}}
-              <li class="nav-item">
-                <a href="/sesi/logout" class="nav-link active mr-4" aria-current="page">LOGOUT</a>
-              </li>
+                <li class="nav-item">
+                    <a href="/sesi/logout" class="nav-link active mr-4" aria-current="page">LOGOUT</a>
+                </li>
 
             </ul>
-          </header>
+        </header>
 
     </div>
     <div class="container">
         <br>
         <h1>LombaKuy!</h1>
+
+        <h4>Welcome {{ $namePengguna }}</h4>
+
         <br>
         <br>
+
         <form method="GET" action="{{ route('registration.submit') }}">
             @csrf
 

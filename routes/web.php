@@ -28,7 +28,11 @@ Route::get('/detail', [TimController::class, 'detail']);
 Route::get('/edit', [TimController::class, 'edit']);
 
 // ! KOMPETISI (HAIDAR)
+// Testing
+Route::get('/test/{name}', [CompeController::class, 'testing']);
+
 Route::get('/yourCompetition', [CompeController::class, 'showCompe']);
+Route::get('/yourCompetition/{namePengguna}', [CompeController::class, 'showCompe']);
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
