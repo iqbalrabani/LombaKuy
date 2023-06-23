@@ -32,8 +32,6 @@ class DatabaseSeeder extends Seeder
             'batasPendaftaran'=>'2023-06-22',
             'penyelenggara'=>'UB',
             'biaya'=>'100000'
-
-
         ]);
     }
 }
