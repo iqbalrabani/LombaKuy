@@ -4,6 +4,28 @@
 <head>
     <title>Admin Dashboard - List Event</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/bg-image.svg');
+            background-size:auto;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        select {
+            background-color: transparent;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        table .tr {
+            border: 2px solid black;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,10 +93,11 @@
                             <button class="btn btn-info mr-2 show-button" data-id="{{ $l->idLomba }}" data-toggle="modal" data-target="#contohModal">Show</button>
                             {{-- <button type="submit" class="btn btn-info mr-2" data-toggle="modal" data-target="#contohModal">Show</button> --}}
                             <a href='/event/edit/{{$l->idLomba}}' class='btn btn-primary mr-2'>Edit</a>
-                            <a href='/event/delete/{{$l->idLomba}}' class='btn btn-danger' onclick='return confirm(\"Apakah Anda yakin ingin menghapus?\")'>Delete</a>
+                            <a href='/event/delete/{{$l->idLomba}}' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Delete</a>
                         </td>
                     </tr>
                 @endforeach
+                <!-- Tampilkan data lomba -->
             </tbody>
         </table>
     </div>
