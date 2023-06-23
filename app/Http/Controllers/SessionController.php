@@ -87,7 +87,7 @@ class SessionController extends Controller
             'namePengguna' => $request->namePengguna,
             'idPengguna' => $request->idPengguna,
             'password' => Hash::make($request->password),
-            'kategori' => $request->kategori
+            'kategori' => 'user'
 
         ];
 

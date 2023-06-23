@@ -23,6 +23,13 @@ class DatabaseSeeder extends Seeder
             'password'=>Hash::make('123456'),
             'kategori'=>'user'
         ]);
+        
+        DB::table('users')->insert([
+            'namePengguna'=>'AdminLomba',
+            'idPengguna'=>'AdminLomba',
+            'password'=>Hash::make('admin123'),
+            'kategori'=>'admin'
+        ]);
 
         DB::table('lombas')->insert([
             'idLomba'=>'123',
@@ -32,8 +39,6 @@ class DatabaseSeeder extends Seeder
             'batasPendaftaran'=>'2023-06-22',
             'penyelenggara'=>'UB',
             'biaya'=>'100000'
-
-
         ]);
     }
 }

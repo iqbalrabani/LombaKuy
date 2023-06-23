@@ -37,13 +37,6 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" required|min:6>
                 </div>
-                <div class="form-group">
-                    <label for="kategori">Kategori</label>
-                    <select class="form-control" id="kategori" name="kategori">
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                    </select>
-                  </div>
                 <button name="submit" type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
         </div>
