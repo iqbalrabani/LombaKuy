@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Admin Dashboard - List Event</title>
+    <title>Pick Your Competitions</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
@@ -13,21 +13,7 @@
         <br>
         <h1>List of Ongoing Competitions</h1>
         <br>
-        <div class="form">
-        <form action="{{ route('apply-lomba') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="idPengguna">ID Pengguna</label>
-                    <input type="text" class="form-control" id="idPengguna" name="idPengguna" placeholder="ID Pengguna">
-                </div>
-                <div class="form-group">
-                    <label for="idLomba">ID Lomba</label>
-                    <input type="text" class="form-control" id="idLomba" name="idLomba" placeholder="ID Lomba">
-                </div>
-                <button type="submit" class="btn btn-primary">Apply Lomba</button>
-            </form>
 
-        </div>
         <br>
         <table class="table">
             <thead>
@@ -54,6 +40,8 @@
                     <td>{{ $m->biaya }}</td>
                     <td>
                         <button type='button' class='btn btn-info'>Show</button>
+                        <a href="/applyCompetition/{{ $idPen }}/{{ $m->idLomba }}" class='btn btn-primary'>Apply</a>
+
                     </td>
                 </tr>
                 @endforeach

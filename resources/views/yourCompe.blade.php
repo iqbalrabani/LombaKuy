@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Auth;
         <br>
         <br>
 
-        <form method="GET" action="{{ route('registration.submit') }}">
+        <form method="GET" action="/listCompetition/{{ $idPen }}">
             @csrf
 
             <div class="form-row align-items-center">

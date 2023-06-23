@@ -44,11 +44,30 @@ class CompeController extends Controller
         return "Not Found";
     }
 
+    public function listLomba2($idPengguna)
+    {
+        $lomba = Lomba::all();
+        if ($lomba) {
+            return view('listLomba', ['lombas' => $lomba, 'idPen' => $idPengguna]);
+        }
+        return "Not Found";
+    }
+
     public function applyLomba(Request $request)
     {
         $idLomba = $request->input('idLomba');
         $idPengguna = $request->input('idPengguna');
 
+        User_Lomba::create([
+            'idLomba' => $idLomba,
+            'idPengguna' => $idPengguna
+        ]);
+
+        return redirect()->route('buat-tim');
+    }
+
+    public function applyLomba2($idPengguna, $idLomba)
+    {
         User_Lomba::create([
             'idLomba' => $idLomba,
             'idPengguna' => $idPengguna
