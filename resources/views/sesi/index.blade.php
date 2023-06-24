@@ -26,7 +26,7 @@
             <form action="/sesi/login" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="idPengguna">Id Pengguna</label>
+                    <label for="idPengguna">Username</label>
                     <input type="text" value="{{ Session::get('idPengguna') }}" name="idPengguna" class="form-control" required>
                 </div>
                 <div class="form-group">
