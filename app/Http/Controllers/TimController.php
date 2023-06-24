@@ -19,15 +19,19 @@ class TimController extends Controller
     public function detail()
     {
         $tims = Tim::all();
+        $users = User::all();
+        $lombas = Lomba::all();
 
-        return view('tim.detail', compact('tims'));
+        return view('tim.detail', compact('tims', 'users', 'lombas'));
     }
 
     public function buat()
     {
         $tims = Tim::all();
+        $users = User::all();
+        $lombas = Lomba::all();
 
-        return view('tim.buatTim', compact('tims'));
+        return view('tim.buatTim', compact('tims', 'users', 'lombas'));
     }
 
     public function edit()

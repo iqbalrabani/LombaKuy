@@ -22,10 +22,6 @@
                         <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Anggota">
                     </div>
                     <div class="form-group">
-                        <label for="idPengguna">ID Pengguna:</label>
-                        <input type="text" class="form-control" id="idPengguna" placeholder="Masukkan ID Pengguna">
-                    </div>
-                    <div class="form-group">
                         <label for="kedudukan">Kedudukan:</label>
                         <input type="text" class="form-control" id="kedudukan" placeholder="Masukkan Kedudukan">
                     </div>
@@ -40,7 +36,6 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">ID Pengguna</th>
                             <th scope="col">Kedudukan</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -61,15 +56,13 @@
 
         function addMember() {
             var nama = $('#nama').val();
-            var idPengguna = $('#idPengguna').val();
             var kedudukan = $('#kedudukan').val();
 
-            if (nama !== '' && idPengguna !== '' && kedudukan !== '') {
+            if (nama !== '' && kedudukan !== '') {
                 anggotaCounter++;
                 var anggotaRow = '<tr>' +
                     '<td>' + anggotaCounter + '</td>' +
                     '<td>' + nama + '</td>' +
-                    '<td>' + idPengguna + '</td>' +
                     '<td>' + kedudukan + '</td>' +
                     '<td><button class="btn btn-danger" onclick="removeMember(this)">Hapus</button></td>' +
                     '</tr>';
@@ -77,13 +70,13 @@
 
                 // Reset input fields
                 $('#nama').val('');
-                $('#idPengguna').val('');
                 $('#kedudukan').val('');
             }
         }
 
         function removeMember(button) {
             $(button).closest('tr').remove();
+            anggotaCounter--;
         }
 
         function saveTim() {
@@ -100,8 +93,7 @@
                 anggotaRows.each(function() {
                     var anggotaData = {
                         nama: $(this).find('td:nth-child(2)').text(),
-                        idPengguna: $(this).find('td:nth-child(3)').text(),
-                        kedudukan: $(this).find('td:nth-child(4)').text()
+                        kedudukan: $(this).find('td:nth-child(3)').text()
                     };
                     timData.anggota.push(anggotaData);
                 });
@@ -128,7 +120,6 @@
         function resetForm() {
             $('#namaTim').val('');
             $('#nama').val('');
-            $('#idPengguna').val('');
             $('#kedudukan').val('');
             $('#anggotaTableBody').empty();
             anggotaCounter = 0;

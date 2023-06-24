@@ -17,23 +17,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'namePengguna'=>'Nathan',
-            'idPengguna'=>'nathan777',
-            'password'=>Hash::make('123456'),
-            'kategori'=>'user'
-        ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // DB::table('users')->insert([
+        //     'namePengguna'=>'Nathan',
+        //     'idPengguna'=>'nathan777',
+        //     'password'=>Hash::make('123456'),
+        //     'kategori'=>'user'
+        // ]);
 
-        DB::table('lombas')->insert([
-            'idLomba'=>'123',
-            'namaLomba'=>'Lomba PKM',
-            'kategoriLomba'=>'DIKTI',
-            'kapasitas'=> 3,
-            'batasPendaftaran'=>'2023-06-22',
-            'penyelenggara'=>'UB',
-            'biaya'=>'100000'
-
-
-        ]);
+        $this->call(UserSeeder::class);
+        $this->call(LombaSeeder::class);
+        $this->call(TimSeeder::class);
+        $this->call(User_LombaSeeder::class);
+        $this->call(User_TimSeeder::class);
+        $this->call(MemberSeeder::class);
+        // DB::table('lombas')->insert([
+        //     'idLomba'=>'123',
+        //     'namaLomba'=>'Lomba PKM',
+        //     'kategoriLomba'=>'DIKTI',
+        //     'kapasitas'=> 3,
+        //     'batasPendaftaran'=>'2023-06-22',
+        //     'penyelenggara'=>'UB',
+        //     'biaya'=>'100000'
+        // ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

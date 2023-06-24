@@ -65,6 +65,7 @@ Route::post('/yourCompetition', function (Request $request) {
 
     return response()->json(['message' => 'Tim berhasil disimpan']);
 });
+
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
