@@ -14,9 +14,10 @@
     <div class="container">
         <h1>Detail Tim Lomba</h1>
         @foreach($tims as $tim)
-        
+        @if ($tim->idPengguna==1)
+        @foreach ($users as $user)
+        @if ($user->idPengguna == $tim->idPengguna )
         <h3>Welcome, {{ $tim->namaTim }}</h3>
-
         <div class="row mt-3">
             <div class="col">
                 <table class="table table-striped">
@@ -92,6 +93,10 @@
                 <a class="btn btn-primary" href="{{ url('/yourCompetition') }}">Save</a>
             </div>
         </div>
+        @endif
+        @break
+        @endforeach
+        @endif
         @endforeach
     </div>
 
