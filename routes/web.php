@@ -30,6 +30,9 @@ Route::get('/detail', [TimController::class, 'detail']);
 Route::get('/edit', [TimController::class, 'edit']);
 
 // ! KOMPETISI (HAIDAR)
+// Testing
+Route::get('/test/{name}', [CompeController::class, 'testing']);
+
 Route::get('/yourCompetition', [CompeController::class, 'showCompe']);
 Route::post('/yourCompetition', function (Request $request) {
     // Validasi data yang diterima dari permintaan
@@ -65,6 +68,8 @@ Route::post('/yourCompetition', function (Request $request) {
 
     return response()->json(['message' => 'Tim berhasil disimpan']);
 });
+Route::get('/yourCompetition/{namePengguna}', [CompeController::class, 'showCompe']);
+Route::get('/yourCompetition/{namePengguna}/{idPengguna}', [CompeController::class, 'showCompe2']);
 
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');

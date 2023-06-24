@@ -33,12 +33,14 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" required>
                 </div>
+
                 <button name="submit" type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
         </div>
+        <br>
         <div class="text-center">
             Belum memiliki akun?
-            <a href="/sesi/register">REGISTER</a>
+            <a href="/sesi/register">Register</a>
         </div>
     </div>
     <!-- Bootstrap JS -->

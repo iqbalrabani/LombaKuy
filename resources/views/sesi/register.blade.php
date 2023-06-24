@@ -9,9 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    @if ($errors->has('email'))
+    @if ($errors->has('error'))
     <div class="alert alert-danger">
-        {{ $errors->first('email') }}
+        {{ $errors->first('error') }}
     </div>
 @endif
 
@@ -38,14 +38,16 @@
                     <input type="password" name="password" class="form-control" required|min:6>
                 </div>
                 <div class="form-group">
-                    <label for="kategori">Kategori</label>
-                    <select class="form-control" id="kategori" name="kategori">
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                    </select>
-                  </div>
+                    <label for="repassword">Retype Password</label>
+                    <input type="password" name="repassword" class="form-control" required|min:6>
+                </div>
                 <button name="submit" type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
+        </div>
+        <br>
+        <div class="text-center">
+            Sudah memiliki akun?
+            <a href="/sesi">Login</a>
         </div>
     </div>
     <!-- Bootstrap JS -->

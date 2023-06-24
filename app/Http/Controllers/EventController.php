@@ -9,7 +9,10 @@ class EventController extends Controller
 {
     function index() {
         $lombas = Lomba::all();
-        return view("event.index", compact('lombas'));
+        if($lombas){
+            return view("event.index", compact('lombas'));
+        }
+        return "Not Found";
     }
 
     public function addLomba(Request $request)
