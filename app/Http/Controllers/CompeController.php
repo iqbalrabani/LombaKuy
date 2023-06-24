@@ -76,24 +76,20 @@ class CompeController extends Controller
         return redirect()->route('buat-tim');
     }
 
-    public function deleteLomba2(Request $request)
-    {
-        $idLomba = $request->input('idLomba');
-        $idPengguna = $request->input('idPengguna');
-
-        User_Lomba::where('idLomba', $idLomba)
-            ->where('idPengguna', $idPengguna)
-            ->delete();
-
-        return redirect()->route('your-competitions');
-    }
-
     function deleteLomba($idLomba)
     {
         $lomba = User_Lomba::where('idLomba', $idLomba);
         $lomba->delete();
         return redirect()->route('your-competitions');
     }
+
+    function deleteLomba2($idLomba, $namePengguna, $idPengguna)
+    {
+        $lomba = User_Lomba::where('idLomba', $idLomba);
+        $lomba->delete();
+        return redirect("/yourCompetition/$namePengguna/$idPengguna");
+    }
+
 
     
 }

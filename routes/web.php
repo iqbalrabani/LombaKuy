@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('sesi.index');
 });
 
 
@@ -52,6 +52,8 @@ Route::get('/applyCompetition/{idPengguna}/{idLomba}', [CompeController::class, 
 
 // hapus lomba
 Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
+Route::get('/lomba/delete/{idLomba}/{namePengguna}/{idPen}',[CompeController::class,'deleteLomba2']);
+
 
 //  SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
 Route::get('/lomba/showTeam/{idPengguna}',[CompeController::class,'showTeam']);

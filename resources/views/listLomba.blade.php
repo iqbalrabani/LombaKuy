@@ -39,7 +39,8 @@
                     <td>{{ $m->penyelenggara }}</td>
                     <td>{{ $m->biaya }}</td>
                     <td>
-                        <button type='button' class='btn btn-info'>Show</button>
+                        <button class="btn btn-info mr-2 show-button" data-id="{{ $m->idLomba }}" data-toggle="modal" data-target="#contohModal">Show</button>
+                        
                         <a href="/applyCompetition/{{ $idPen }}/{{ $m->idLomba }}" class='btn btn-primary'>Apply</a>
 
                     </td>
@@ -49,10 +50,65 @@
         </table>
     </div>
 
+    <!-- Modal untuk menampilkan ringkasan lomba -->
+    <div class="modal fade" id="contohModal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Ringkasan Lomba</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID Lomba:</strong> <span id="idLomba"></span></p>
+                    <p><strong>Nama Lomba:</strong> {{ $m->namaLomba }}</p>
+                    <p><strong>Kategori Lomba:</strong> {{ $m->kategoriLomba }}</p>
+                    <p><strong>Kapasitas:</strong> {{ $m->kapasitas }}</p>
+                    <p><strong>Batas Pendaftaran:</strong> {{ $m->batasPendaftaran }}</p>
+                    <p><strong>Penyelenggara:</strong> {{ $m->penyelenggara }}</p>
+                    <p><strong>Biaya Pendaftaran:</strong> {{ $m->biaya }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.show-button').click(function() {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '/getRingkasan/' + id,
+                    type: 'GET',
+                    success: function(response) {
+                        $('#ringkasanContent').html(response);
+                        $('#contohModal').modal('show');
+                    },
+                    error: function() {
+                        // alert('Failed to retrieve summary. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.show-button').click(function() {
+                var idLomba = $(this).data('id');
+                $('#idLomba').text(idLomba);
+            });
+        });
+    </script>
 
 
 </body>

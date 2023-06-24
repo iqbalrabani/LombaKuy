@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 <head>
     <title>Admin Dashboard - List Event</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/bg-image.svg');
+            background-size:auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,7 +80,7 @@ use Illuminate\Support\Facades\Auth;
                     <td>{{ $m->penyelenggara }}</td>
                     <td>{{ $m->biaya }}</td>
                     <td><a href='/detail' class='btn btn-info'>Show Team</a></td>
-                    <td><a href='/lomba/delete/{{$m->idLomba}}' class='btn btn-danger'>Delete</a></td>
+                    <td><a href='/lomba/delete/{{$m->idLomba}}/{{ $namePengguna }}/{{ $idPen }}' class='btn btn-danger'>Delete</a></td>
                 </tr>
                 @endif
                 @endforeach
