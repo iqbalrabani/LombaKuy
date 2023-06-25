@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('sesi.index');
 });
 
 Route::post('/buattim/{idTim}', [TimController::class, 'tambahMember', ['idTim' => 1]])->name('tambahMember');
@@ -71,24 +71,34 @@ Route::post('/yourCompetition', function (Request $request) {
 });
 Route::get('/yourCompetition/{namePengguna}', [CompeController::class, 'showCompe']);
 Route::get('/yourCompetition/{namePengguna}/{idPengguna}', [CompeController::class, 'showCompe2']);
-
 Route::get('/listCompetition', [CompeController::class, 'listLomba']);
 Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('your-competitions');
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
+
+// perpindahan dari yourcompe ke list compe yang ada
+Route::get('/listCompetition/{idPengguna}', [CompeController::class, 'listLomba2'])->name('list-compe2');
 
 // Apply lomba - Daftar timnya
 Route::get('/buattim', [TimController::class, 'buat'])->name('buat-tim');
 
 // Tambah lomba
 Route::post('/applyCompetition', [CompeController::class, 'applyLomba'])->name('apply-lomba');
+Route::get('/applyCompetition/{idPengguna}/{idLomba}', [CompeController::class, 'applyLomba2'])->name('apply-lomba2');
+
 // hapus lomba
 Route::get('/lomba/delete/{idLomba}', [CompeController::class, 'deleteLomba']);
 
 // ! SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
 Route::get('/lomba/showTeam/{idPengguna}', [CompeController::class, 'showTeam']);
+Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
+Route::get('/lomba/delete/{idLomba}/{namePengguna}/{idPen}',[CompeController::class,'deleteLomba2']);
 
 
-// ! LOGIN
+//  SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
+Route::get('/lomba/showTeam/{idPengguna}',[CompeController::class,'showTeam']);
+
+
+// ! LOGIN (mayun)
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;
 
 Route::get('/sesi', [SessionController::class, 'index']);

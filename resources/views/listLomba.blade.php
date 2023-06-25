@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Admin Dashboard - List Event</title>
+    <title>Pick Your Competitions</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
@@ -13,21 +13,7 @@
         <br>
         <h1>List of Ongoing Competitions</h1>
         <br>
-        <div class="form">
-        <form action="{{ route('apply-lomba') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="idPengguna">ID Pengguna</label>
-                    <input type="text" class="form-control" id="idPengguna" name="idPengguna" placeholder="ID Pengguna">
-                </div>
-                <div class="form-group">
-                    <label for="idLomba">ID Lomba</label>
-                    <input type="text" class="form-control" id="idLomba" name="idLomba" placeholder="ID Lomba">
-                </div>
-                <button type="submit" class="btn btn-primary">Apply Lomba</button>
-            </form>
 
-        </div>
         <br>
         <table class="table">
             <thead>
@@ -53,7 +39,10 @@
                     <td>{{ $m->penyelenggara }}</td>
                     <td>{{ $m->biaya }}</td>
                     <td>
-                        <button type='button' class='btn btn-info'>Show</button>
+                        <button class="btn btn-info mr-2 show-button" data-id="{{ $m->idLomba }}" data-toggle="modal" data-target="#contohModal">Show</button>
+                        
+                        <a href="/applyCompetition/{{ $idPen }}/{{ $m->idLomba }}" class='btn btn-primary'>Apply</a>
+
                     </td>
                 </tr>
                 @endforeach
@@ -61,10 +50,65 @@
         </table>
     </div>
 
+    <!-- Modal untuk menampilkan ringkasan lomba -->
+    <div class="modal fade" id="contohModal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Ringkasan Lomba</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID Lomba:</strong> <span id="idLomba"></span></p>
+                    <p><strong>Nama Lomba:</strong> {{ $m->namaLomba }}</p>
+                    <p><strong>Kategori Lomba:</strong> {{ $m->kategoriLomba }}</p>
+                    <p><strong>Kapasitas:</strong> {{ $m->kapasitas }}</p>
+                    <p><strong>Batas Pendaftaran:</strong> {{ $m->batasPendaftaran }}</p>
+                    <p><strong>Penyelenggara:</strong> {{ $m->penyelenggara }}</p>
+                    <p><strong>Biaya Pendaftaran:</strong> {{ $m->biaya }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.show-button').click(function() {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '/getRingkasan/' + id,
+                    type: 'GET',
+                    success: function(response) {
+                        $('#ringkasanContent').html(response);
+                        $('#contohModal').modal('show');
+                    },
+                    error: function() {
+                        // alert('Failed to retrieve summary. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.show-button').click(function() {
+                var idLomba = $(this).data('id');
+                $('#idLomba').text(idLomba);
+            });
+        });
+    </script>
 
 
 </body>

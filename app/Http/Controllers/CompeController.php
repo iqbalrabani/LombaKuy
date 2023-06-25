@@ -44,6 +44,15 @@ class CompeController extends Controller
         return "Not Found";
     }
 
+    public function listLomba2($idPengguna)
+    {
+        $lomba = Lomba::all();
+        if ($lomba) {
+            return view('listLomba', ['lombas' => $lomba, 'idPen' => $idPengguna]);
+        }
+        return "Not Found";
+    }
+
     public function applyLomba(Request $request)
     {
         $idLomba = $request->input('idLomba');
@@ -57,16 +66,14 @@ class CompeController extends Controller
         return redirect()->route('buat-tim');
     }
 
-    public function deleteLomba2(Request $request)
+    public function applyLomba2($idPengguna, $idLomba)
     {
-        $idLomba = $request->input('idLomba');
-        $idPengguna = $request->input('idPengguna');
+        User_Lomba::create([
+            'idLomba' => $idLomba,
+            'idPengguna' => $idPengguna
+        ]);
 
-        User_Lomba::where('idLomba', $idLomba)
-            ->where('idPengguna', $idPengguna)
-            ->delete();
-
-        return redirect()->route('your-competitions');
+        return redirect()->route('buat-tim');
     }
 
     function deleteLomba($idLomba)
@@ -75,6 +82,14 @@ class CompeController extends Controller
         $lomba->delete();
         return redirect()->route('your-competitions');
     }
+
+    function deleteLomba2($idLomba, $namePengguna, $idPengguna)
+    {
+        $lomba = User_Lomba::where('idLomba', $idLomba);
+        $lomba->delete();
+        return redirect("/yourCompetition/$namePengguna/$idPengguna");
+    }
+
 
     
 }
