@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Form Tim Lomba</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -7,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>Daftar Lomba</h1>
@@ -18,14 +20,15 @@
                         <input type="text" class="form-control" id="namaTim" placeholder="Masukkan Nama Tim">
                     </div>
                     <div class="form-group">
-                        <label for="nama">Nama Anggota:</label>
-                        <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Anggota">
+                        <label for="namaMember">Nama Anggota:</label>
+                        <input type="text" class="form-control" id="namaMember" placeholder="Masukkan Nama Anggota">
                     </div>
                     <div class="form-group">
                         <label for="kedudukan">Kedudukan:</label>
                         <input type="text" class="form-control" id="kedudukan" placeholder="Masukkan Kedudukan">
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="addMember()">Tambah Anggota</button>
+                    <button type="button" class="btn btn-primary" onclick="addMember()" formaction="{{ route('tambahMember', ['idTim' => 1])}}" method="POST">Tambah Anggota</button>
+
                 </form>
             </div>
         </div>
@@ -55,24 +58,44 @@
         var anggotaCounter = 0;
 
         function addMember() {
-            var nama = $('#nama').val();
+            var namaMember = $('#namaMember').val();
             var kedudukan = $('#kedudukan').val();
 
-            if (nama !== '' && kedudukan !== '') {
+            if (namaMember !== '' && kedudukan !== '') {
                 anggotaCounter++;
+
                 var anggotaRow = '<tr>' +
                     '<td>' + anggotaCounter + '</td>' +
-                    '<td>' + nama + '</td>' +
+                    '<td>' + namaMember + '</td>' +
                     '<td>' + kedudukan + '</td>' +
                     '<td><button class="btn btn-danger" onclick="removeMember(this)">Hapus</button></td>' +
                     '</tr>';
+
                 $('#anggotaTableBody').append(anggotaRow);
 
                 // Reset input fields
-                $('#nama').val('');
+                $('#namaMember').val('');
                 $('#kedudukan').val('');
+
+                // Send data to server
+                $.ajax({
+                    url: '/simpan-anggota', // Ganti URL sesuai dengan endpoint di Laravel
+                    method: 'POST',
+                    data: {
+                        idTim: 1,
+                        namaMember: namaMember,
+                        kedudukan: kedudukan
+                    },
+                    success: function(response) {
+                        console.log('Data anggota berhasil disimpan ke database.');
+                    },
+                    error: function(xhr) {
+                        console.log('Terjadi kesalahan saat menyimpan data anggota.');
+                    }
+                });
             }
         }
+
 
         function removeMember(button) {
             $(button).closest('tr').remove();
@@ -126,4 +149,5 @@
         }
     </script>
 </body>
+
 </html>

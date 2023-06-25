@@ -24,6 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/buattim/{idTim}', [TimController::class, 'tambahMember', ['idTim' => 1]])->name('tambahMember');
 
 Route::get('/detail', [TimController::class, 'detail']);
 
@@ -81,28 +82,28 @@ Route::get('/buattim', [TimController::class, 'buat'])->name('buat-tim');
 // Tambah lomba
 Route::post('/applyCompetition', [CompeController::class, 'applyLomba'])->name('apply-lomba');
 // hapus lomba
-Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
+Route::get('/lomba/delete/{idLomba}', [CompeController::class, 'deleteLomba']);
 
 // ! SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
-Route::get('/lomba/showTeam/{idPengguna}',[CompeController::class,'showTeam']);
+Route::get('/lomba/showTeam/{idPengguna}', [CompeController::class, 'showTeam']);
 
 
 // ! LOGIN
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');;
 
-Route::get('/sesi',[SessionController::class,'index']);
-Route::post('/sesi/login',[SessionController::class,'login']);
+Route::get('/sesi', [SessionController::class, 'index']);
+Route::post('/sesi/login', [SessionController::class, 'login']);
 
-Route::get('/event',[EventController::class,'index']);
-Route::post('/event/add',[EventController::class,'addLomba']);
-Route::get('/event/edit/{idLomba}',[EventController::class,'editPage']);
-Route::post('/event/edited/{idLomba}',[EventController::class,'editLomba']);
-Route::get('/event/delete/{idLomba}',[EventController::class,'deleteLomba']);
+Route::get('/event', [EventController::class, 'index']);
+Route::post('/event/add', [EventController::class, 'addLomba']);
+Route::get('/event/edit/{idLomba}', [EventController::class, 'editPage']);
+Route::post('/event/edited/{idLomba}', [EventController::class, 'editLomba']);
+Route::get('/event/delete/{idLomba}', [EventController::class, 'deleteLomba']);
 Route::get('/getRingkasan/{id}', 'RingkasanController@show');
-Route::get('/sesi/logout',[SessionController::class,'logout']);
-Route::get('/sesi/register',[SessionController::class,'register']);
-Route::post('/sesi/create',[SessionController::class,'create']);
+Route::get('/sesi/logout', [SessionController::class, 'logout']);
+Route::get('/sesi/register', [SessionController::class, 'register']);
+Route::post('/sesi/create', [SessionController::class, 'create']);
 
 // ! LOGIN
-Route::get('/sesi',[SessionController::class,'index']);
-Route::post('/sesi/login',[SessionController::class,'login']);
+Route::get('/sesi', [SessionController::class, 'index']);
+Route::post('/sesi/login', [SessionController::class, 'login']);
