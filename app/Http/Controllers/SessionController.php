@@ -37,7 +37,7 @@ class SessionController extends Controller
         if (Auth::attempt($infologin)) {
             // Jika berhasil
             // Redirect ke halaman utama
-            if ($kategori == 'user') {
+            if (strtolower($kategori) == 'user') {
                 $namePengguna = Auth::user()->namePengguna;
                 $idPengguna = Auth::user()->idPengguna;
                 return redirect("/yourCompetition/$namePengguna/$idPengguna");
