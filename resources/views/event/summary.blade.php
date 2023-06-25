@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Ringkasan Lomba</title>
 </head>
+
 <body>
     <h2>Ringkasan Lomba</h2>
     <p>ID: {{ $lomba->idLomba }}</p>
@@ -15,4 +17,5 @@
 
     <a href="{{ route('lombas.index') }}">Kembali ke Daftar Lomba</a>
 </body>
+
 </html>

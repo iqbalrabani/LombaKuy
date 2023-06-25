@@ -14,13 +14,25 @@ class MemberSeeder extends Seeder
     {
         DB::table('members')->insert([
             [
-                'idPengguna' => '1',
-                'namaMember' => 'Anggota A'
+                'idTim' => '1',
+                'namaMember' => 'Anggota A',
+                'kedudukan' => 'Ketua'
             ],
             [
-                'idPengguna' => '2',
-                'namaMember' => 'Anggota B'
+                'idTim' => '2',
+                'namaMember' => 'Anggota B',
+                'kedudukan' => 'Ketua'
             ],
+            [
+                'idTim' => '1',
+                'namaMember' => 'Anggota C',
+                'kedudukan' => 'Anggota'
+            ],
+            [
+                'idTim' => '2',
+                'namaMember' => 'Pembimbing D',
+                'kedudukan' => 'Pembimbing'
+            ]
             // Tambahkan data lain sesuai kebutuhan Anda
         ]);
     }

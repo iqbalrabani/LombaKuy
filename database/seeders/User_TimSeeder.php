@@ -21,7 +21,6 @@ class User_TimSeeder extends Seeder
                 'idPengguna' => '2',
                 'idTim' => '2'
             ],
-            // Tambahkan data lain sesuai kebutuhan Anda
         ]);
     }
 }

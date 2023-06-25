@@ -12,13 +12,14 @@ class CreateMembersTable extends Migration
     public function up(): void
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->unsignedBigInteger('idPengguna');
-            $table->foreign('idPengguna')
-                ->references('idPengguna')
-                ->on('users')
+            $table->unsignedBigInteger('idTim');
+            $table->foreign('idTim')
+                ->references('idTim')
+                ->on('tims')
                 ->onDelete('cascade')
-                ->name('fk_members_idPengguna');
+                ->name('fk_members_idTim');
             $table->string('namaMember');
+            $table->string('kedudukan');
         });
     }
 
@@ -27,6 +28,10 @@ class CreateMembersTable extends Migration
      */
     public function down(): void
     {
+        Schema::table('members', function (Blueprint $table) {
+            $table->dropForeign('fk_members_idTim');
+        });
+
         Schema::dropIfExists('members');
     }
 }

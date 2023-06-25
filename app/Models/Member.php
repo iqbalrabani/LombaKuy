@@ -10,12 +10,14 @@ class Member extends Model
     protected $table = 'members';
     public $timestamps = false;
     protected $fillable = [
-        'idPengguna',
-        'namaMember'
+        'idTim',
+        'namaMember',
+        'kedudukan'
     ];
 
-    public function user()
+
+    public function tim()
     {
-        return $this->belongsTo(User::class, 'idPengguna');
+        return $this->belongsTo(Tim::class, 'idTim');
     }
 }
