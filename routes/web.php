@@ -20,8 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// LANDING PAGE
 Route::get('/', function () {
-    return view('sesi.index');
+    return view('landing.index');
 });
 
 Route::post('/buattim/{idTim}', [TimController::class, 'tambahMember', ['idTim' => 1]])->name('tambahMember');
