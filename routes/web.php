@@ -21,8 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// LANDING PAGE
 Route::get('/', function () {
-    return view('sesi.index');
+    return view('landing.index');
 });
 
 // Rute untuk menambahkan anggota tim
