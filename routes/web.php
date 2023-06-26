@@ -24,7 +24,19 @@ Route::get('/', function () {
     return view('sesi.index');
 });
 
-Route::post('/buattim/{idTim}', [TimController::class, 'tambahMember', ['idTim' => 1]])->name('tambahMember');
+// Rute untuk menambahkan anggota tim
+Route::post('/tim/tambah-member', [TimController::class, 'tambahMember'])->name('tambahMember');
+Route::get('/tim/buat', [TimController::class, 'buat'])->name('buatTimView');
+Route::delete('/tim/member/{namaMember}', [TimController::class, 'deleteMember'])->name('deleteMember');
+
+// Rute untuk menyimpan tim
+Route::post('/tim/simpan', [TimController::class, 'simpanTim'])->name('simpanTim');
+
+// Rute untuk mengatur ulang form
+Route::get('/tim/reset', [TimController::class, 'resetForm'])->name('resetForm');
+
+// Rute untuk halaman index (contoh saja)
+Route::get('/tim', [TimController::class, 'index'])->name('index');
 
 Route::get('/detail', [TimController::class, 'detail']);
 
@@ -90,12 +102,12 @@ Route::get('/lomba/delete/{idLomba}', [CompeController::class, 'deleteLomba']);
 
 // ! SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
 Route::get('/lomba/showTeam/{idPengguna}', [CompeController::class, 'showTeam']);
-Route::get('/lomba/delete/{idLomba}',[CompeController::class,'deleteLomba']);
-Route::get('/lomba/delete/{idLomba}/{namePengguna}/{idPen}',[CompeController::class,'deleteLomba2']);
+Route::get('/lomba/delete/{idLomba}', [CompeController::class, 'deleteLomba']);
+Route::get('/lomba/delete/{idLomba}/{namePengguna}/{idPen}', [CompeController::class, 'deleteLomba2']);
 
 
 //  SHOW TEAM DARI KOMPETISI KE PROFILE TIM (HAIDAR)
-Route::get('/lomba/showTeam/{idPengguna}',[CompeController::class,'showTeam']);
+Route::get('/lomba/showTeam/{idPengguna}', [CompeController::class, 'showTeam']);
 
 
 // ! LOGIN (mayun)

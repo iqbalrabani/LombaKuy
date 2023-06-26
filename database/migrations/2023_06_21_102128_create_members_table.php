@@ -18,7 +18,7 @@ class CreateMembersTable extends Migration
                 ->on('tims')
                 ->onDelete('cascade')
                 ->name('fk_members_idTim');
-            $table->string('namaMember');
+            $table->string('namaMember')->primary();
             $table->string('kedudukan');
         });
     }
