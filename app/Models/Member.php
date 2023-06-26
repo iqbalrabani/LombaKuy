@@ -9,6 +9,7 @@ class Member extends Model
 {
     protected $table = 'members';
     public $timestamps = false;
+    // protected $primaryKey = 'namaMember';
     protected $fillable = [
         'idTim',
         'namaMember',
