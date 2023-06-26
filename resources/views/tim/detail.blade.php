@@ -4,7 +4,6 @@
 <head>
     <title>Detail Tim Lomba</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -14,32 +13,10 @@
     <div class="container">
         <h1>Detail Tim Lomba</h1>
         @foreach($tims as $tim)
-        @if ($tim->idPengguna==1)
+        @if ($tim->idTim == 1) <!-- Ubah kondisi menjadi $tim->idTim == 1 -->
         @foreach ($users as $user)
         @if ($user->idPengguna == $tim->idPengguna )
         <h3>Welcome, {{ $tim->namaTim }}</h3>
-        <div class="row mt-3">
-            <div class="col">
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Tim ID</th>
-                            <th scope="col">Nama Tim</th>
-                            <th scope="col" class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ $tim->idTim }}</td>
-                            <td>{{ $tim->namaTim }}</td>
-                            <td class="text-center">
-                                <button class="btn btn-primary" onclick="showAddMemberForm()">Add New Member</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <div class="row mt-3">
             <div class="col">
@@ -48,134 +25,63 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">ID Pengguna</th>
                             <th scope="col">Kedudukan</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($members as $index => $member)
+                        @if ($member->idTim==1)
                         <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>123456</td>
-                            <td>Ketua</td>
+                            <td>{{ $index+1 }}</td>
+                            <td>{{ $member->namaMember }}</td>
+                            <td>{{ $member->kedudukan }}</td>
                             <td>
                                 <button class="btn btn-primary" onclick="editMember(this)">Edit</button>
+                                <form action="{{ route('deleteMember', ['namaMember' => $member->namaMember]) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>789012</td>
-                            <td>Anggota</td>
-                            <td>
-                                <button class="btn btn-primary" onclick="editMember(this)">Edit</button>
-                                <button class="btn btn-danger" onclick="confirmDelete(this)">Kick</button>
-                            </td>
-                        </tr>
+                        @endif
+                        @endforeach
                         <tr id="addMemberRow" style="display: none;">
-                            <td></td>
-                            <td><input type="text" class="form-control" placeholder="Nama"></td>
-                            <td><input type="text" class="form-control" placeholder="ID Pengguna"></td>
-                            <td><input type="text" class="form-control" placeholder="Kedudukan"></td>
-                            <td>
-                                <button class="btn btn-primary" onclick="saveMember(this)">Save</button>
-                                <button class="btn btn-secondary" onclick="cancelAddMember(this)">Cancel</button>
+                            <td colspan="4">
+                                @include('tim.add-member-form')
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        @endif
+        @endforeach
+        @endif
+        @endforeach
 
+        <!-- Tombol Submit untuk Kembali ke Halaman Lain -->
         <div class="row mt-3">
             <div class="col">
-                <a class="btn btn-primary" href="{{ url('/yourCompetition') }}">Save</a>
+                <form action="yourCompetitionx" method="GET">
+                    <button type="submit" class="btn btn-primary">Kembali</button>
+                </form>
             </div>
         </div>
-        @endif
-        @break
-        @endforeach
-        @endif
-        @endforeach
     </div>
 
-    @include('tim.confirm-delete-modal')
-
     <script>
-        function confirmDelete(button) {
-            // Mengatur referensi baris yang akan dihapus
-            var row = $(button).closest('tr');
-            $('#confirmDeleteModal').data('row', row).modal('show');
-        }
-
-        function deleteMember() {
-            var row = $('#confirmDeleteModal').data('row');
-            row.remove();
-            $('#confirmDeleteModal').modal('hide');
-        }
-
-        function showAddMemberForm() {
-            var addMemberRow = $('#addMemberRow');
-            var clonedRow = addMemberRow.clone();
-            clonedRow.removeAttr('id').show();
-            clonedRow.find('input').val('');
-            clonedRow.insertBefore(addMemberRow);
-        }
-
-        function cancelAddMember(button) {
-            var row = $(button).closest('tr');
-            row.remove();
-        }
-
         function editMember(button) {
-            var row = $(button).closest('tr');
-            var columns = row.find('td');
+            var row = $(button).closest('tr'); // Mendapatkan baris terdekat yang berisi data member
+            var namaMember = row.find('td:nth-child(2)').text(); // Mendapatkan nama member dari kolom kedua pada baris tersebut
+            var kedudukan = row.find('td:nth-child(3)').text(); // Mendapatkan kedudukan member dari kolom ketiga pada baris tersebut
 
-            // Get the values from the current row
-            var nama = columns.eq(1).text();
-            var idPengguna = columns.eq(2).text();
-            var kedudukan = columns.eq(3).text();
-
-            // Create input fields to edit the values
-            var namaInput = '<input type="text" class="form-control" value="' + nama + '">';
-            var idPenggunaInput = '<input type="text" class="form-control" value="' + idPengguna + '">';
-            var kedudukanInput = '<input type="text" class="form-control" value="' + kedudukan + '">';
-
-            // Replace the values in the row with input fields
-            columns.eq(1).html(namaInput);
-            columns.eq(2).html(idPenggunaInput);
-            columns.eq(3).html(kedudukanInput);
-
-            // Change the button to "Save"
-            var saveButton = '<button class="btn btn-primary" onclick="saveMember(this)">Save</button>';
-            $(button).replaceWith(saveButton);
-
-            var cancelButton = '<button class="btn btn-danger" onclick="confirmDelete(this)">Kick</button>';
-            row.find('.btn-secondary').replaceWith(cancelButton);
-        }
-
-        function saveMember(button) {
-            var row = $(button).closest('tr');
-            var columns = row.find('td');
-
-            // Get the updated values from the input fields
-            var nama = columns.eq(1).find('input').val();
-            var idPengguna = columns.eq(2).find('input').val();
-            var kedudukan = columns.eq(3).find('input').val();
-
-            // Update the row with the new values
-            columns.eq(1).html(nama);
-            columns.eq(2).html(idPengguna);
-            columns.eq(3).html(kedudukan);
-
-            // Change the button back to "Edit"
-            var editButton = '<button class="btn btn-primary" onclick="editMember(this)">Edit</button>';
-            $(button).replaceWith(editButton);
-
-            // Change the "Cancel" button to "Kick"
-            var cancelButton = '<button class="btn btn-danger" onclick="confirmDelete(this)">Kick</button>';
-            row.find('.btn-secondary').replaceWith(cancelButton);
+            // Menampilkan form edit member dengan data yang sudah ada
+            var addMemberRow = $('#addMemberRow');
+            addMemberRow.find('input[name="namaMember"]').val(namaMember); // Mengisi input namaMember pada form dengan data namaMember yang sudah ada
+            addMemberRow.find('input[name="kedudukan"]').val(kedudukan); // Mengisi input kedudukan pada form dengan data kedudukan yang sudah ada
+            addMemberRow.show(); // Menampilkan form edit member
         }
     </script>
 </body>

@@ -24,11 +24,12 @@ class TimController extends Controller
         $tims = Tim::all();
         $users = User::all();
         $lombas = Lomba::all();
+        $members = Member::all();
 
-        return view('tim.detail', compact('tims', 'users', 'lombas'));
+        return view('tim.detail', compact('tims', 'users', 'lombas', 'members'));
     }
 
-    public function buat()
+    public function buat($idPengguna)
     {
 
         $members = Member::all();
@@ -36,7 +37,7 @@ class TimController extends Controller
         $users = User::all();
         $lombas = Lomba::all();
 
-        return view('tim.buatTim', compact('members', 'tims', 'users', 'lombas'));
+        return view('tim.buatTim', compact('members', 'tims', 'users', 'lombas', 'idPengguna'));
     }
 
     public function edit()
@@ -82,32 +83,75 @@ class TimController extends Controller
         return redirect()->back();
     }
 
-
-    public function resetForm()
+    public function showAddMemberForm()
     {
-        // Hapus semua data tim dan anggotanya dari database
-        Member::truncate(); // Menghapus semua data pada tabel members
-        Tim::truncate(); // Menghapus semua data pada tabel tims
-
-        // Redirect kembali ke halaman yang sama
-        return redirect()->back();
+        // Menampilkan form tambah anggota
+        return view('tim.add-member-form');
     }
 
-    public function simpanTim()
+
+    public function simpanTim(Request $request)
     {
+        // Validasi input
+        $request->validate([
+            'namaTim' => 'required'
+        ]);
+
         // Ambil data yang dikirim melalui form
-        $namaTim = request('namaTim');
+        $namaTim = $request->input('namaTim');
+        $users = User::all();
+        $user = $users->where('idPengguna', 1)->first();
+        $idPengguna = $user->idPengguna;
+        $namePengguna = $user->namePengguna;
 
         // Buat objek tim baru
         $tim = new Tim();
         $tim->namaTim = $namaTim;
+        $tim->idPengguna = $idPengguna;
 
-        // Simpan tim ke database   
+        // Simpan tim ke database
         $tim->save();
 
-        // Redirect ke halaman index
-        return redirect()->route('yourCompe');
+        // Redirect ke halaman yourCompe dengan membawa nilai idPengguna dan idTim
+        return redirect()->route('yourCompetition', ['namePengguna' => $namePengguna, 'idPengguna' => $idPengguna]);
     }
+    public function kembali()
+    {
+        $users = User::all();
+        $user = $users->where('idPengguna', 1)->first();
+        $idPengguna = $user->idPengguna;
+        $namePengguna = $user->namePengguna;
+
+        // Redirect ke halaman yourCompe dengan membawa nilai idPengguna dan idTim
+        return redirect()->route('yourCompetition', ['namePengguna' => $namePengguna, 'idPengguna' => $idPengguna]);
+    }
+
+    public function addMember(Request $request)
+    {
+        $member = new Member();
+        $member->idTim = 1; // Ubah sesuai dengan ID tim yang sesuai
+        $member->namaMember = $request->input('nama');
+        $member->kedudukan = $request->input('kedudukan');
+        $member->save();
+
+        return redirect()->back();
+    }
+
+    public function yourCompe($namePengguna, $idPengguna)
+    {
+        $users = User::all();
+        $user = $users->where('id', 1)->first();
+        $idPengguna = $user->idPengguna;
+        $namePengguna = $user->namePengguna;
+
+        return view('yourCompe', ['namePengguna' => $namePengguna, 'idPengguna' => $idPengguna]);
+    }
+
+    public function buatTim($idTim)
+    {
+        return view('buatTim', compact('idTim'));
+    }
+
 
     public function showMember()
     {

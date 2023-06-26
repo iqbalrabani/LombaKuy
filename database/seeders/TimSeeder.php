@@ -14,12 +14,10 @@ class TimSeeder extends Seeder
     {
         DB::table('tims')->insert([
             [
-                'idTim' => '1',
                 'namaTim' => 'Tim A',
                 'idPengguna' => '1'
             ],
             [
-                'idTim' => '2',
                 'namaTim' => 'Tim B',
                 'idPengguna' => '2'
             ],

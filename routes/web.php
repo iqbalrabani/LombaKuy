@@ -4,6 +4,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CompeController;
 use App\Http\Controllers\TimController;
 use App\Http\Controllers\EventController;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RingkasanController;
 use App\Models\Tim;
@@ -26,8 +27,23 @@ Route::get('/', function () {
 
 // Rute untuk menambahkan anggota tim
 Route::post('/tim/tambah-member', [TimController::class, 'tambahMember'])->name('tambahMember');
-Route::get('/tim/buat', [TimController::class, 'buat'])->name('buatTimView');
+// web.php
+Route::get('/tim/buat/{idPengguna}', [TimController::class, 'buat'])->name('buat-tim');
+
+// Route::get('/buattim/{idPengguna}', [TimController::class, 'buat'])->name('buat-tim');
+
 Route::delete('/tim/member/{namaMember}', [TimController::class, 'deleteMember'])->name('deleteMember');
+
+Route::post('/tim/simpan-tim', [TimController::class, 'simpanTim'])->name('simpan-tim');
+
+Route::get('/yourCompe/{idTim}', [TimController::class, 'yourCompe'])->name('yourCompe');
+
+Route::post('yourCompetition/{namePengguna}/{idPengguna}', [TimController::class, 'yourCompe'])->name('yourCompetition');
+
+Route::get('yourCompetitionx', [TimController::class, 'kembali'])->name('kembali');
+
+Route::get('/yourCompe', [TimController::class, 'yourCompe'])->name('yourCompe');
+
 
 // Rute untuk menyimpan tim
 Route::post('/tim/simpan', [TimController::class, 'simpanTim'])->name('simpanTim');
@@ -91,7 +107,6 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('reg
 Route::get('/listCompetition/{idPengguna}', [CompeController::class, 'listLomba2'])->name('list-compe2');
 
 // Apply lomba - Daftar timnya
-Route::get('/buattim', [TimController::class, 'buat'])->name('buat-tim');
 
 // Tambah lomba
 Route::post('/applyCompetition', [CompeController::class, 'applyLomba'])->name('apply-lomba');

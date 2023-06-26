@@ -10,16 +10,25 @@
 </head>
 
 <body>
+
     <div class="container">
         <h1>Daftar Lomba</h1>
         <div class="row mt-3">
             <div class="col">
-                <form method="POST" action="/tim/tambah-member">
+                <form id="timForm" method="POST" action="/tim/simpan-tim">
                     @csrf
                     <div class="form-group">
                         <label for="namaTim">Nama Tim:</label>
-                        <input type="text" class="form-control" id="namaTim" name="namaTim" placeholder="Masukkan Nama Tim">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="namaTim" name="namaTim" placeholder="Masukkan Nama Tim">
+                            <div class="input-group-append">
+                                <button id="simpanBtn" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
                     </div>
+                </form>
+                <form method="POST" action="/tim/tambah-member">
+                    @csrf
                     <div class="form-group">
                         <label for="namaMember">Nama Anggota:</label>
                         <input type="text" class="form-control" id="namaMember" name="namaMember" placeholder="Masukkan Nama Anggota">
@@ -45,9 +54,9 @@
                     </thead>
                     <tbody>
                         @foreach ($members as $index => $member)
-                        @if ($member->idTim==1)
+                        @if ($member->idTim==$idPengguna)
                         <tr>
-                            <td>{{$index+1}}</td>
+                            <td>{{ $index+1 }}</td>
                             <td>{{ $member->namaMember }}</td>
                             <td>{{ $member->kedudukan }}</td>
                             <td>
@@ -64,13 +73,19 @@
                 </table>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col">
-                <button class="btn btn-primary">Simpan</button>
-                <button class="btn btn-secondary">Reset</button>
-            </div>
-        </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#timForm').submit(function(e) {
+                e.preventDefault(); // Mencegah form dikirim secara default
+
+                var namaTim = $('#namaTim').val(); // Mengambil nilai dari input namaTim
+                $('#namaTim').val(namaTim); // Memasukkan nilai namaTim ke dalam input namaTim
+                this.submit(); // Mengirimkan form setelah nilai namaTim dimasukkan
+            });
+        });
+    </script>
 </body>
 
 </html>

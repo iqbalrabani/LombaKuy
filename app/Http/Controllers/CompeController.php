@@ -73,7 +73,7 @@ class CompeController extends Controller
             'idPengguna' => $idPengguna
         ]);
 
-        return redirect()->route('buat-tim');
+        return redirect()->route('buat-tim', ['idPengguna' => $idPengguna]);
     }
 
     function deleteLomba($idLomba)
