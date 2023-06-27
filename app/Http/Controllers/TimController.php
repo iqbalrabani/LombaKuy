@@ -100,7 +100,7 @@ class TimController extends Controller
         // Ambil data yang dikirim melalui form
         $namaTim = $request->input('namaTim');
         $users = User::all();
-        $user = $users->where('idPengguna', 1)->first();
+        $user = $users->where('idPengguna', 119)->first();
         $idPengguna = $user->idPengguna;
         $namePengguna = $user->namePengguna;
 
