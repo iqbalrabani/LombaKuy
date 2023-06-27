@@ -152,7 +152,7 @@
             <h2 id="sesi">Starts Your Journey Now!</h2>
           </div>
           <div class="col-md-5 text-center text-md-end">
-            <p><a href="#" class="btn btn-outline-white align-items-center"><span>Login</span></a> <a href="#"
+            <p><a href="/sesi" class="btn btn-outline-white align-items-center"><span>Login</span></a> <a href="/sesi/register"
                 class="btn btn-outline-white align-items-center"><span>Register</span></a></p>
           </div>
         </div>
