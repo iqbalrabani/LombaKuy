@@ -18,7 +18,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
@@ -202,7 +202,7 @@
                                     <td>
                                         <button class="btn btn-info mr-2 show-button" data-id="{{ $l->idLomba }}" data-toggle="modal" data-target="#contohModal">Show</button>
                                         <a href='/event/edit/{{$l->idLomba}}' class='btn btn-primary mr-2'>Edit</a>
-                                        <a href='/event/delete/{{$l->idLomba}}' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Delete</a>
+                                        <a href='/event/delete/{{$l->idLomba}}' class='btn btn-danger' data-toggle="modal" data-target="#deleteModal">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -245,7 +245,6 @@
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; LombaKuy 2023. <a href="" data-toggle="modal" data-target="#contributorModal"><b>See Our Team.</b></a></span>
                     </div>
-                    
                 </div>
             </footer>
             <!-- End of Footer -->
@@ -298,6 +297,26 @@
                 <div class="modal-body">I Gusti Ngurah Mayun S G P - 215150200111047</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Delete" below to confirm the deletion.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Delete</button>
                 </div>
             </div>
         </div>

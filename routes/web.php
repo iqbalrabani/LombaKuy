@@ -76,7 +76,7 @@ Route::get('/yourCompetition', [CompeController::class, 'showCompe'])->name('you
 Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('registration.submit');
 
 // perpindahan dari yourcompe ke list compe yang ada
-Route::get('/listCompetition/{idPengguna}', [CompeController::class, 'listLomba2'])->name('list-compe2');
+Route::get('/listCompetition/{idPengguna}/{namePengguna}', [CompeController::class, 'listLomba2'])->name('list-compe2');
 
 // Apply lomba - Daftar timnya
 Route::get('/buattim', [TimController::class, 'buat'])->name('buat-tim');
@@ -104,16 +104,27 @@ Route::get('/listCompetition', [CompeController::class, 'listLomba'])->name('reg
 Route::get('/sesi', [SessionController::class, 'index']);
 Route::post('/sesi/login', [SessionController::class, 'login']);
 
+// Show Event dari Admin
 Route::get('/event', [EventController::class, 'index']);
+
+// Menambah Event
 Route::post('/event/add', [EventController::class, 'addLomba']);
+
+// Merubah Event
 Route::get('/event/edit/{idLomba}', [EventController::class, 'editPage']);
 Route::post('/event/edited/{idLomba}', [EventController::class, 'editLomba']);
+
+// Menghapus Event
 Route::get('/event/delete/{idLomba}', [EventController::class, 'deleteLomba']);
-Route::get('/getRingkasan/{id}', 'RingkasanController@show');
-Route::get('/sesi/logout', [SessionController::class, 'logout']);
+
+// Fitur Register
 Route::get('/sesi/register', [SessionController::class, 'register']);
 Route::post('/sesi/create', [SessionController::class, 'create']);
 
-// ! LOGIN
+// Fitur Login
 Route::get('/sesi', [SessionController::class, 'index']);
 Route::post('/sesi/login', [SessionController::class, 'login']);
+
+// Fitur Logout
+Route::get('/sesi/logout', [SessionController::class, 'logout']);
+

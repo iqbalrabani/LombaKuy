@@ -44,11 +44,11 @@ class CompeController extends Controller
         return "Not Found";
     }
 
-    public function listLomba2($idPengguna)
+    public function listLomba2($idPengguna, $namePengguna)
     {
         $lomba = Lomba::all();
         if ($lomba) {
-            return view('listLomba', ['lombas' => $lomba, 'idPen' => $idPengguna]);
+            return view('listLomba', ['lombas' => $lomba, 'idPen' => $idPengguna, 'namePengguna' => $namePengguna]);
         }
         return "Not Found";
     }

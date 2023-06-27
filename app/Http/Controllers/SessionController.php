@@ -95,7 +95,7 @@ class SessionController extends Controller
         $check = User::where('idPengguna',$idPengguna)->first();
 
         if($check){
-            return redirect()->back()->withErrors(['error' => 'ID PENGGUNA TELAH DIGUNAKAN']);
+            return redirect()->back()->withErrors(['error' => 'USERNAME TELAH DIGUNAKAN']);
         } else {
             if(strlen($password)>=6){
                 if($password==$repassword){
