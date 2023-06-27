@@ -9,10 +9,7 @@ class Tim extends Model
 {
     protected $table = 'tims';
     protected $fillable = [
-        'idTim',
         'namaTim',
         'idPengguna',
-        'kedudukan',
-        'jumlahAnggota'
     ];
 }

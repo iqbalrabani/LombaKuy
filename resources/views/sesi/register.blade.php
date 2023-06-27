@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
+
 <body>
     @if ($errors->has('error'))
     <div class="alert alert-danger">
         {{ $errors->first('error') }}
     </div>
-@endif
+    @endif
 
-@if ($errors->has('succes'))
-<div class="alert alert-succes">
-    {{ $errors->first('succes') }}
-</div>
-@endif 
+    @if ($errors->has('succes'))
+    <div class="alert alert-succes">
+        {{ $errors->first('succes') }}
+    </div>
+    @endif
     <div class="container">
         <div class="w-50 mx-auto border rounded px-3 py-3 mt-5">
             <h1 class="text-center">Register</h1>
@@ -53,11 +55,5 @@
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
-
